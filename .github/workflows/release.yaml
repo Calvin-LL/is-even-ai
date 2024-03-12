@@ -20,6 +20,8 @@ jobs:
           node-version: "20.x"
       - run: npm ci
       - run: npm test
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
   release:
     needs: test

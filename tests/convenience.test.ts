@@ -1,4 +1,4 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import {
   areEqual,
   areNotEqual,
@@ -27,7 +27,7 @@ it("should work with key as a environmental variable", async () => {
 it("should work with key passed to setKey", async () => {
   const tempOpenAiApiKey = process.env.OPENAI_API_KEY!;
 
-  delete process.env.OPENAI_API_KEY;
+  vi.stubEnv("OPENAI_API_KEY", "");
 
   setApiKey(tempOpenAiApiKey);
 
@@ -44,5 +44,5 @@ it("should work with key passed to setKey", async () => {
   expect(await isLessThan(8, 9)).toBe(true);
   expect(await isLessThan(9, 8)).toBe(false);
 
-  process.env.OPENAI_API_KEY = tempOpenAiApiKey;
+  vi.unstubAllEnvs();
 }, 60000);
