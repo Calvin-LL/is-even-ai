@@ -1,16 +1,34 @@
 {
   "name": "is-even-ai",
-  "version": "0.0.1",
-  "description": "",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.js",
+  "version": "0.0.2",
+  "description": "Check if a number is even using AI",
+  "keywords": [
+    "AI",
+    "is-even",
+    "is-odd",
+    "ChatGPT",
+    "GPT",
+    "OpenAI"
+  ],
+  "author": {
+    "name": "Calvin Liang",
+    "email": "npm@calvin.sh",
+    "url": "https://calvin.sh"
+  },
+  "repository": "Calvin-LL/is-even-ai",
+  "bugs": "https://github.com/Calvin-LL/is-even-ai/issues",
+  "homepage": "https://github.com/Calvin-LL/is-even-ai",
+  "license": "MIT",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "type": "commonjs",
   "scripts": {
     "test": "vitest",
     "build": "tsc"
   },
-  "author": "Calvin Liang",
-  "license": "MIT",
   "dependencies": {
     "openai": "^4.28.4"
   },
