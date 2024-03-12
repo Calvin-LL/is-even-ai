@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check tag and package.json version match
+        uses: geritol/match-tag-to-package-version@0.2.0
+        with:
+          TAG_PREFIX: v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - run: npm ci
+      - run: npm test
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Create Repo Release
+        uses: softprops/action-gh-release@v2
