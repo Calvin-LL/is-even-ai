@@ -1,8 +1,5 @@
 import { expect, it, vi } from "vitest";
-import {
-  IsEvenAiCore,
-  IsEvenAiCorePromptTemplates,
-} from "../src/IsEvenAiCore.js";
+import { IsEvenAiCore, IsEvenAiCorePromptTemplates } from "../src/index";
 
 type OptionalKeys<T> = keyof {
   [K in keyof T as undefined extends T[K] ? K : never]: T[K];

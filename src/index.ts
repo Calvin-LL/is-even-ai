@@ -1,4 +1,4 @@
-export { IsEvenAiCore } from "./IsEvenAiCore";
+export { IsEvenAiCore, IsEvenAiCorePromptTemplates } from "./IsEvenAiCore";
 export { IsEvenAiOpenAi } from "./IsEvenAiOpenAi";
 
 export {

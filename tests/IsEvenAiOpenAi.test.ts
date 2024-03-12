@@ -1,9 +1,13 @@
 import OpenAI from "openai";
-import { beforeAll, expect, it } from "vitest";
-import { IsEvenAiOpenAi } from "../src/IsEvenAiOpenAi.js";
+import { afterAll, beforeAll, expect, it } from "vitest";
+import { IsEvenAiOpenAi } from "../src/index";
 
 beforeAll(() => {
   process.env.OPENAI_API_KEY = process.env.VITE_OPENAI_API_KEY;
+});
+
+afterAll(() => {
+  delete process.env.OPENAI_API_KEY;
 });
 
 it("should construct with config", async () => {
