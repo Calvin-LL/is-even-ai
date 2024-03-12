@@ -34,7 +34,7 @@ console.log(await isEvenAiOpenAi.isLessThan(9, 8)); // false (most of the time)
 
 Feel free to make a PR to add more AI platforms.
 
-- [x] [OpenAI](https://openai.com)
+- [x] [OpenAI](https://openai.com) via `IsEvenAiOpenAi`
 
 ## Supported methods
 
