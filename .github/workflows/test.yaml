@@ -15,5 +15,3 @@ jobs:
           node-version: "20.x"
       - run: npm ci
       - run: npm test
-        env:
-          OPERA_API_KEY: ${{ secrets.OPERA_API_KEY }}
