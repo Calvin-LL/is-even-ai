@@ -10,8 +10,6 @@ import {
 } from "../src/index";
 
 it("should work with key as a environmental variable", async () => {
-  process.env.OPENAI_API_KEY = process.env.VITE_OPENAI_API_KEY;
-
   expect(await isEven(2)).toBe(true);
   expect(await isEven(3)).toBe(false);
   expect(await isOdd(4)).toBe(false);
@@ -24,12 +22,14 @@ it("should work with key as a environmental variable", async () => {
   expect(await isGreaterThan(7, 8)).toBe(false);
   expect(await isLessThan(8, 9)).toBe(true);
   expect(await isLessThan(9, 8)).toBe(false);
-
-  delete process.env.OPENAI_API_KEY;
 }, 60000);
 
 it("should work with key passed to setKey", async () => {
-  setApiKey(process.env.VITE_OPENAI_API_KEY!);
+  const tempOpenAiApiKey = process.env.OPENAI_API_KEY!;
+
+  delete process.env.OPENAI_API_KEY;
+
+  setApiKey(tempOpenAiApiKey);
 
   expect(await isEven(2)).toBe(true);
   expect(await isEven(3)).toBe(false);
@@ -43,4 +43,6 @@ it("should work with key passed to setKey", async () => {
   expect(await isGreaterThan(7, 8)).toBe(false);
   expect(await isLessThan(8, 9)).toBe(true);
   expect(await isLessThan(9, 8)).toBe(false);
+
+  process.env.OPENAI_API_KEY = tempOpenAiApiKey;
 }, 60000);

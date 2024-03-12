@@ -59,12 +59,10 @@ for (const [key, complementKey] of Object.entries(optionalKeyComplements)) {
       {
         ...testPromptTemplates,
       };
-    // @ts-expect-error
     delete testPromptTemplatesWithoutKey[key];
 
     // @ts-expect-error
     const isEvenAi = new IsEvenAiCore(testPromptTemplatesWithoutKey, query);
-    // @ts-expect-error
     const result = await isEvenAi[key](1, 2);
 
     expect(result).toBe(false);
