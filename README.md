@@ -4,7 +4,9 @@
 [![NPM License](https://img.shields.io/npm/l/is-even-ai.svg?style=flat)](https://github.com/Calvin-LL/is-even-ai/blob/main/LICENSE)
 [![NPM Downloads](https://img.shields.io/npm/dt/is-even-ai.svg?style=flat)](https://www.npmjs.com/package/is-even-ai)
 
-Check if a number is even using AI.
+Check if a number is even using the power of ✨AI✨.
+
+Uses OpenAI's GPT-3.5-turbo model under the hood to determine if a number is even.
 
 For all those who want to use AI in their product but don't know how.
 
