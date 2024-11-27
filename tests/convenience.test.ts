@@ -5,9 +5,9 @@ import {
   isEven,
   isGreaterThan,
   isLessThan,
-  isNegative,
   isOdd,
   isPositive,
+  isNegative,
   setApiKey,
 } from "../src/index";
 
