@@ -21,7 +21,7 @@ export interface IsEvenAiCorePromptTemplates {
 export class IsEvenAiCore {
   constructor(
     protected promptTemplates: IsEvenAiCorePromptTemplates,
-    private readonly query: (s: string) => Promise<boolean | undefined>,
+    private readonly query: (s: string) => Promise<boolean | undefined>
   ) {}
 
   private async getPrompt<T extends keyof IsEvenAiCorePromptTemplates>(
