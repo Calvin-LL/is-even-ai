@@ -5,7 +5,9 @@ import {
   isEven,
   isGreaterThan,
   isLessThan,
+  isNegative,
   isOdd,
+  isPositive,
   setApiKey,
 } from "../src/index";
 
@@ -22,6 +24,10 @@ it("should work with key as a environmental variable", async () => {
   expect(await isGreaterThan(7, 8)).toBe(false);
   expect(await isLessThan(8, 9)).toBe(true);
   expect(await isLessThan(9, 8)).toBe(false);
+  expect(await isPositive(5)).toBe(true);
+  expect(await isPositive(-5)).toBe(false);
+  expect(await isNegative(-5)).toBe(true);
+  expect(await isNegative(5)).toBe(false);
 }, 60000);
 
 it("should work with key passed to setKey", async () => {
@@ -43,6 +49,10 @@ it("should work with key passed to setKey", async () => {
   expect(await isGreaterThan(7, 8)).toBe(false);
   expect(await isLessThan(8, 9)).toBe(true);
   expect(await isLessThan(9, 8)).toBe(false);
+  expect(await isPositive(5)).toBe(true);
+  expect(await isPositive(-5)).toBe(false);
+  expect(await isNegative(-5)).toBe(true);
+  expect(await isNegative(5)).toBe(false);
 
   vi.unstubAllEnvs();
 }, 60000);

@@ -39,4 +39,8 @@ it("should construct with OpenAi instance", async () => {
   expect(await isEvenAiOpenAi.isGreaterThan(7, 8)).toBe(false);
   expect(await isEvenAiOpenAi.isLessThan(8, 9)).toBe(true);
   expect(await isEvenAiOpenAi.isLessThan(9, 8)).toBe(false);
+  expect(await isEvenAiOpenAi.isPositive(5)).toBe(true);
+  expect(await isEvenAiOpenAi.isPositive(-5)).toBe(false);
+  expect(await isEvenAiOpenAi.isNegative(-5)).toBe(true);
+  expect(await isEvenAiOpenAi.isNegative(5)).toBe(false);
 }, 60000);
