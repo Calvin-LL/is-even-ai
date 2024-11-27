@@ -1,7 +1,7 @@
 type Tuple<
   N extends number,
   V = number,
-  T extends V[] = [],
+  T extends V[] = []
 > = N extends T["length"] ? T : Tuple<N, V, [...T, V]>;
 export type PromptTemplate<T extends number> =
   | ((...args: Tuple<T>) => string)
