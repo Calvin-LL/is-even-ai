@@ -38,3 +38,11 @@ export function isGreaterThan(a: number, b: number) {
 export function isLessThan(a: number, b: number) {
   return getIsEvenAiOpenAi().isLessThan(a, b);
 }
+
+export function isPositive(n: number) {
+  return getIsEvenAiOpenAi().isPositive(n);
+}
+
+export function isNegative(n: number) {
+  return getIsEvenAiOpenAi().isNegative(n);
+}
