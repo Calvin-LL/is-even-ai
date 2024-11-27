@@ -30,6 +30,8 @@ import {
   isGreaterThan,
   isLessThan,
   isOdd,
+  isPositive,
+  isNegative,
   setApiKey,
 } from "is-even-ai";
 
@@ -48,6 +50,10 @@ console.log(await isGreaterThan(8, 7)); // true
 console.log(await isGreaterThan(7, 8)); // false
 console.log(await isLessThan(9, 8)); // false
 console.log(await isLessThan(8, 9)); // true
+console.log(await isPositive(5)); // true
+console.log(await isPositive(-5)); // false
+console.log(await isNegative(-5)); // true
+console.log(await isNegative(5)); // false
 ```
 
 for more advance usage like changing which model to use and setting the temperature, use `IsEvenAiOpenAi` instead
@@ -78,6 +84,10 @@ console.log(await isEvenAiOpenAi.isGreaterThan(8, 7)); // true
 console.log(await isEvenAiOpenAi.isGreaterThan(7, 8)); // false
 console.log(await isEvenAiOpenAi.isLessThan(8, 9)); // true
 console.log(await isEvenAiOpenAi.isLessThan(9, 8)); // false
+console.log(await isEvenAiOpenAi.isPositive(5)); // true
+console.log(await isEvenAiOpenAi.isPositive(-5)); // false
+console.log(await isEvenAiOpenAi.isNegative(-5)); // true
+console.log(await isEvenAiOpenAi.isNegative(5)); // false
 ```
 
 ## Supported AI platforms
@@ -94,3 +104,5 @@ Feel free to make a PR to add more AI platforms.
 - `areNotEqual(a: number, b: number)`
 - `isGreaterThan(a: number, b: number)`
 - `isLessThan(a: number, b: number)`
+- `ìsPositive(n: number)`
+- `isNegative(n: number)`
