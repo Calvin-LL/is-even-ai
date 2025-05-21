@@ -1,40 +1,63 @@
 import { IsEvenAiOpenAi } from "./IsEvenAiOpenAi";
+import { IsEvenAiOpenRouter, IsEvenAiOpenRouterConfig } from "./IsEvenAiOpenRouter";
+import { IsEvenAiCore } from "./IsEvenAiCore";
 
-let openAiApiKey: string | undefined;
-let isEvenAiOpenAi: IsEvenAiOpenAi | undefined;
+let activeClient: IsEvenAiCore | undefined;
 
-function getIsEvenAiOpenAi(): IsEvenAiOpenAi {
-  if (!isEvenAiOpenAi) {
-    isEvenAiOpenAi = new IsEvenAiOpenAi({ apiKey: openAiApiKey });
-  }
-
-  return isEvenAiOpenAi;
+export function setOpenAIApiKey(apiKey: string) {
+  activeClient = new IsEvenAiOpenAi({ apiKey });
 }
 
-export function setApiKey(apiKey: string) {
-  openAiApiKey = apiKey;
+export function setOpenRouterConfig(config: IsEvenAiOpenRouterConfig) {
+  activeClient = new IsEvenAiOpenRouter(config);
+}
+
+function getActiveClient(): IsEvenAiCore {
+  if (activeClient) {
+    return activeClient;
+  }
+
+  if (process.env.OPENAI_API_KEY) {
+    setOpenAIApiKey(process.env.OPENAI_API_KEY);
+    return activeClient!;
+  }
+
+  if (process.env.OPENROUTER_API_KEY) {
+    setOpenRouterConfig({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      siteUrl: process.env.OPENROUTER_SITE_URL,
+      siteName: process.env.OPENROUTER_SITE_NAME,
+      model: process.env.OPENROUTER_MODEL,
+      baseURL: process.env.OPENROUTER_BASE_URL,
+    });
+    return activeClient!;
+  }
+
+  throw new Error(
+    "No AI provider API key set. Please call setOpenAIApiKey() or setOpenRouterConfig(), or set OPENAI_API_KEY or OPENROUTER_API_KEY environment variables."
+  );
 }
 
 export function isEven(n: number) {
-  return getIsEvenAiOpenAi().isEven(n);
+  return getActiveClient().isEven(n);
 }
 
 export function isOdd(n: number) {
-  return getIsEvenAiOpenAi().isOdd(n);
+  return getActiveClient().isOdd(n);
 }
 
 export function areEqual(a: number, b: number) {
-  return getIsEvenAiOpenAi().areEqual(a, b);
+  return getActiveClient().areEqual(a, b);
 }
 
 export function areNotEqual(a: number, b: number) {
-  return getIsEvenAiOpenAi().areNotEqual(a, b);
+  return getActiveClient().areNotEqual(a, b);
 }
 
 export function isGreaterThan(a: number, b: number) {
-  return getIsEvenAiOpenAi().isGreaterThan(a, b);
+  return getActiveClient().isGreaterThan(a, b);
 }
 
 export function isLessThan(a: number, b: number) {
-  return getIsEvenAiOpenAi().isLessThan(a, b);
+  return getActiveClient().isLessThan(a, b);
 }

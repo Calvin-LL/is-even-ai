@@ -1,5 +1,6 @@
 export { IsEvenAiCore, IsEvenAiCorePromptTemplates } from "./IsEvenAiCore";
 export { IsEvenAiOpenAi } from "./IsEvenAiOpenAi";
+export { IsEvenAiOpenRouter, IsEvenAiOpenRouterConfig } from "./IsEvenAiOpenRouter";
 
 export {
   areEqual,
@@ -8,5 +9,6 @@ export {
   isGreaterThan,
   isLessThan,
   isOdd,
-  setApiKey,
+  setOpenAIApiKey,
+  setOpenRouterConfig,
 } from "./convenience";
