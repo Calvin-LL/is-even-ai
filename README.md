@@ -50,7 +50,7 @@ console.log(await isLessThan(9, 8)); // false
 console.log(await isLessThan(8, 9)); // true
 ```
 
-for more advance usage like changing which model to use and setting the temperature, use `IsEvenAiOpenAi` instead
+for more advanced usage, like changing which model to use and setting the temperature, use `IsEvenAiOpenAi` instead
 
 ```ts
 import { IsEvenAiOpenAi } from "is-even-ai";
