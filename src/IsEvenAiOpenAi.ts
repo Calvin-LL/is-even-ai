@@ -11,6 +11,8 @@ const OpenAiPromptTemplates = {
   areNotEqual: (a: number, b: number) => `Are ${a} and ${b} not equal?`,
   isGreaterThan: (a: number, b: number) => `Is ${a} greater than ${b}?`,
   isLessThan: (a: number, b: number) => `Is ${a} less than ${b}?`,
+  isPositive: (n: number) => `Is ${n} positive?`,
+  isNegative: (n: number) => `Is ${n} negative?`,
 } satisfies IsEvenAiCorePromptTemplates;
 
 export class IsEvenAiOpenAi extends IsEvenAiCore {

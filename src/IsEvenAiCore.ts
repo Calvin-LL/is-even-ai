@@ -14,6 +14,8 @@ export interface IsEvenAiCorePromptTemplates {
   areNotEqual?: PromptTemplate<2>;
   isGreaterThan: PromptTemplate<2>;
   isLessThan?: PromptTemplate<2>;
+  isPositive: PromptTemplate<1>;
+  isNegative?: PromptTemplate<1>;
 }
 
 export class IsEvenAiCore {
@@ -78,6 +80,21 @@ export class IsEvenAiCore {
 
     if (!prompt) {
       return !(await this.isGreaterThan(b, a));
+    }
+
+    return this.query(prompt);
+  }
+
+  async isPositive(n: number): Promise<boolean | undefined> {
+    const prompt = await this.getPrompt("isPositive", n);
+    return this.query(prompt);
+  }
+
+  async isNegative(n: number): Promise<boolean | undefined> {
+    const prompt = await this.getPrompt("isNegative", n);
+
+    if (!prompt) {
+      return !(await this.isPositive(n));
     }
 
     return this.query(prompt);

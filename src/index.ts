@@ -8,5 +8,7 @@ export {
   isGreaterThan,
   isLessThan,
   isOdd,
+  isPositive,
+  isNegative,
   setApiKey,
 } from "./convenience";
