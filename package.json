@@ -30,6 +30,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "ollama": "^0.5.16",
     "openai": "^4.28.4"
   },
   "devDependencies": {
