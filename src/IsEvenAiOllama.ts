@@ -1,10 +1,10 @@
-import { ClientOptions, OpenAI } from "openai";
+import { Ollama } from "ollama";
 import { IsEvenAiCore, IsEvenAiCorePromptTemplates } from "./IsEvenAiCore";
 
 const SYSTEM_PROMPT =
   "You are an AI assistant designed to answer questions about numbers. You will only answer with only the word true or false.";
 
-const OpenAiPromptTemplates = {
+const OllamaPromptTemplates = {
   isEven: (n: number) => `Is ${n} an even number?`,
   isOdd: (n: number) => `Is ${n} an odd number?`,
   areEqual: (a: number, b: number) => `Are ${a} and ${b} equal?`,
@@ -13,49 +13,37 @@ const OpenAiPromptTemplates = {
   isLessThan: (a: number, b: number) => `Is ${a} less than ${b}?`,
 } satisfies IsEvenAiCorePromptTemplates;
 
-export class IsEvenAiOpenAi extends IsEvenAiCore {
-  constructor(
-    obj: ClientOptions | OpenAI = {},
-    chatOptions: Omit<
-      OpenAI.Chat.ChatCompletionCreateParamsStreaming,
-      "messages" | "stream"
-    > = {
-      model: "gpt-3.5-turbo",
-      temperature: 0,
-    }
-  ) {
-    let openAi: OpenAI;
-    if (obj instanceof OpenAI) {
-      openAi = obj;
+type OllamaConfig = {
+  model?: string;
+  host?: string;
+};
+
+export class IsEvenAiOllama extends IsEvenAiCore {
+  constructor(obj: OllamaConfig = {}) {
+    let ollama: Ollama;
+    if (obj instanceof Ollama) {
+      ollama = obj;
     } else {
-      openAi = new OpenAI(obj);
+      ollama = new Ollama({
+        host: obj.host || "http://localhost:11434",
+      });
     }
 
     const query = async (s: string) => {
-      const stream = await openAi.beta.chat.completions.stream({
+      const result = await ollama.chat({
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           { role: "user", content: s },
         ],
-        ...chatOptions,
+        model: obj.model || "qwen3:1.7b",
+        stream: false,
       });
 
-      let response = "";
-      for await (const chunk of stream) {
-        response += chunk.choices[0]?.delta?.content?.toLowerCase() || "";
+      let response = result.message.content;
 
-        if (response.length > 0) {
-          if ("true".startsWith(response)) {
-            return true;
-          } else if ("false".startsWith(response)) {
-            return false;
-          }
-        }
-      }
-
-      return undefined;
+      return response.toLocaleLowerCase().includes("true");
     };
 
-    super(OpenAiPromptTemplates, query);
+    super(OllamaPromptTemplates, query);
   }
 }

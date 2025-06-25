@@ -4,7 +4,7 @@
     "declaration": true,
     "strict": true,
     "outDir": "dist",
-    "lib": ["ES2021"],
+    "lib": ["ES2021", "dom"],
     "module": "node16",
     "target": "ES2021"
   },
